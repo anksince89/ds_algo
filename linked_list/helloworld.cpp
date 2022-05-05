@@ -1,92 +1,5 @@
 #include <iostream>
-
-class SinglyNode
-{
-  public:
-    int data;
-    SinglyNode* next;
-    SinglyNode(int d) : data{d} {}
-    SinglyNode(){};
-};
-
-class LinkedList
-{
-  private:
-    SinglyNode* head;
-  
-  public:
-    LinkedList(SinglyNode* node)
-    {
-      head = new SinglyNode();
-      head->data = node->data;
-      head->next = NULL;
-    }
-
-    ~LinkedList()
-    {
-      delete head;
-    }
-
-    // Print linked list
-    void printList()
-    {
-      SinglyNode* tNode = head;
-      while(tNode != NULL)
-      {
-        std::cout << tNode->data << " ";
-        tNode = tNode->next;
-      }
-      std::cout << std::endl;
-    }
-
-    // Add a new node at a position pos in the list
-    void addNode(SinglyNode* node, int pos)
-    {
-      SinglyNode* tNode = head;
-      
-      if (pos == 0) // Head position
-      {
-        node->next = tNode;
-        head = node;
-      }
-      else // Positions at the end or in the middle
-      {
-        for (int i = 0; i < pos - 1; i++)
-        {
-          tNode = tNode->next;
-        }
-        SinglyNode* nextNode = tNode->next;
-        tNode->next = node;
-        node->next = nextNode;
-      } 
-    }
-
-    // Delete node at position pos
-    void deleteNode(int pos)
-    {
-      SinglyNode* tNode = head;
-      if(pos == 0)
-      {
-        tNode = head->next;
-        head = tNode;
-      }
-      else
-      {
-        for (int i = 0; i < pos - 1; i++)
-        {
-          tNode = tNode->next;
-        }
-        if(tNode->next != NULL)
-        {
-          tNode->next = tNode->next->next;
-        }
-        else
-        {
-          tNode->next = NULL;
-        } 
-      }
-    }
-};
+#include "singly_list.h"
 
 int main()
 {
@@ -96,7 +9,9 @@ int main()
   list->addNode(new SinglyNode(7),1);
   list->addNode(new SinglyNode(9),3);
   list->printList();
+  std::cout << list->lengthOfList() << std::endl;
   list->deleteNode(0);
   list->printList();
+  
   return 0;  
 }
