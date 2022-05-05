@@ -60,6 +60,32 @@ class LinkedList
         node->next = nextNode;
       } 
     }
+
+    // Delete node at position pos
+    void deleteNode(int pos)
+    {
+      SinglyNode* tNode = head;
+      if(pos == 0)
+      {
+        tNode = head->next;
+        head = tNode;
+      }
+      else
+      {
+        for (int i = 0; i < pos - 1; i++)
+        {
+          tNode = tNode->next;
+        }
+        if(tNode->next != NULL)
+        {
+          tNode->next = tNode->next->next;
+        }
+        else
+        {
+          tNode->next = NULL;
+        } 
+      }
+    }
 };
 
 int main()
@@ -69,6 +95,8 @@ int main()
   list->addNode(new SinglyNode(5),0);
   list->addNode(new SinglyNode(7),1);
   list->addNode(new SinglyNode(9),3);
+  list->printList();
+  list->deleteNode(0);
   list->printList();
   return 0;  
 }
