@@ -24,9 +24,8 @@ class LinkedList
 
     ~LinkedList()
     {
-      delete head;
+        deleteList();
     }
-
     // Print linked list
     void printList();
 
@@ -36,10 +35,14 @@ class LinkedList
     // Calculate length of the list
     const uint16_t lengthOfList();
 
+    // Delete the linked list
+    void deleteList();
+
     // Delete node at position pos
     void deleteNode(int pos);
 
-
+    // Delete all the occurence of given key
+    void deleteNodeKey(int key);
 };
 
 void LinkedList::printList()
@@ -86,6 +89,17 @@ const uint16_t LinkedList::lengthOfList()
     return length;
 }
 
+void LinkedList::deleteList()
+{
+    SinglyNode* tNode = head;
+    while(head != NULL)
+    {
+        tNode = head->next;
+        delete head;
+        head = tNode;
+    }
+}
+
 void LinkedList::deleteNode(int pos)
 {
     SinglyNode* tNode = head;
@@ -108,5 +122,33 @@ void LinkedList::deleteNode(int pos)
         {
             tNode->next = NULL;
         } 
+    }
+}
+
+void LinkedList::deleteNodeKey(int key)
+{
+    SinglyNode* tNode = head;
+    SinglyNode* prev = NULL;
+
+    while(tNode)
+    {
+        if(!prev && tNode->data == key)
+        {
+            head = tNode->next;
+            tNode = head;
+        }
+        else
+        {
+            if(tNode->data == key)
+            {
+                prev->next = tNode->next;
+            }
+            else
+            {
+                prev = tNode;
+            }
+            tNode = tNode->next;
+        }
+        
     }
 }

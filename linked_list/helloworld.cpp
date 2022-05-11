@@ -4,14 +4,18 @@
 int main()
 {
   LinkedList *list = new LinkedList(new SinglyNode(3));
-  list->printList();
   list->addNode(new SinglyNode(5),0);
-  list->addNode(new SinglyNode(7),1);
+  list->addNode(new SinglyNode(5),0);
+  list->addNode(new SinglyNode(7),2);
   list->addNode(new SinglyNode(9),3);
+  list->addNode(new SinglyNode(5),4);
+  list->addNode(new SinglyNode(5),4);
+  list->addNode(new SinglyNode(5),2);
+  list->addNode(new SinglyNode(5),8);
   list->printList();
-  std::cout << list->lengthOfList() << std::endl;
-  list->deleteNode(0);
+  list->deleteNodeKey(5);
   list->printList();
-  
+  list->deleteList();
+  list->printList();
   return 0;  
 }
